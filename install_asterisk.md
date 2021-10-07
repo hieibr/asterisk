@@ -159,7 +159,7 @@ Em “Channel Drivers” se certifique de que **chan_pjsip** esteja marcado:
 
 <img alt="Centos 7" src="img/menuselect2.png">
 
-Deixa igual está ai... agora TAB 2 vezes até chegar em **"SAVE & EXIT"-**
+Deixa igual que está ai... agora TAB 2 vezes até chegar em **"SAVE & EXIT"-**
 
 Agora vamos entrar na reta final!!! uffa!.. O negocinho demorando para fazer. 
 vamos compilar e instalar,Bom acho que eu nao preciso comentar mas já vou frizando para os esquecidinhos de plantão é **UM COMANDO DE CADA VEZ** !!!! 
