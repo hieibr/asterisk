@@ -1,11 +1,9 @@
-## 🚀 Analisador de Audio SuperNova - Passo a Passo / Documentação.
-## <img alt="asterisk" src="img/asterisk.png"> Passo 1 - Instação Asterisk
+## 🚀 Documentação 1 - Instação Asterisk - Passo a Passo / Documentação. <img alt="asterisk" src="img/asterisk.png">
 
 
 Instalação do asterisk irá  ser me nosso querido CentOS7 
 
 Vamos efetuar atualização do CentOS  <img alt="Centos 7" src="img/centos.png">
-
 ```bash
 yum update all
  ```
