@@ -2,7 +2,7 @@
 ## 🚀 <img alt="asterisk" src="img/asterisk.png"> Passo 1 - Instação Asterisk - Passo a Passo / Documentação.
 
 
-Instalação do asterisk irá  ser me nosso querido CentOS7 
+Instalação do asterisk irá  ser no nosso querido CentOS7 
 
 Vamos efetuar atualização do CentOS  <img alt="Centos 7" src="img/centos.png">
 
