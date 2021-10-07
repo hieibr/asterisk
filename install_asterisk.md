@@ -7,7 +7,7 @@ Instalação do asterisk irá  ser me nosso querido CentOS7
 Vamos efetuar atualização do CentOS  <img alt="Centos 7" src="img/centos.png">
 
 ```bash
-yum udpdate -y
+yum update all
  ```
 
 Obs: Esse processo irá levar pelo menos uns 10minutos dependedo da conexão que você estiver utilizando, vá tomar um café.
@@ -29,6 +29,8 @@ Vamos instalar uma porrada de dependecia.
 ```bash
 yum install -y wget vim net-tools openssl-devel libedit-devel sqlite-devel psmisc gmime-devel ncurses-devel libtermcap-devel sox newt-devel libxml2-devel libtiff-devel audiofile-devel gtk2-devel uuid-devel libtool libuuid-devel subversion kernel-devel kernel-devel-$(uname -r) git subversion
 ```
+
+
 
 Uffa... acabou aí né, mas calma tem mais, porque agora vamos instalar o “Development  Tools”, isso porque não começamos nem instalar o asterisk =)
 
