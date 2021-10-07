@@ -148,7 +148,7 @@ Agora está o pulo de gato e é necessário fazer algumas ativações verificaç
 ```bash
 make menuselect
 ```
-Selecione todas essa paradinhas no menuselect.
+Selecione todas essas paradinhas no menuselect.
 
 <img alt="Centos 7" src="img/menuselect.png">
 
