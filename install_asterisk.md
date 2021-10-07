@@ -18,7 +18,7 @@ Após conclusão vamos reniciar o sistema
 sudo reboot
 ```
 
-Agora vamos lá instalar mais uma caralhada de epel para não dar problema lá na frente (serio já deixei de instalar isso já deus alguns bugs inexplicável)
+Agora vamos lá instalar mais uma caralhada de epel para não dar problema lá na frente (serio já deixei de instalar isso já deu  uns alguns bugs inexplicável)
 
 ```bash
 yum install -y epel-release
