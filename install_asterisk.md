@@ -1,7 +1,12 @@
+<<<<<<< HEAD
 ## 🚀 Documentação 1 - Instação Asterisk - Passo a Passo / Documentação. <img alt="asterisk" src="img/asterisk.png">
+=======
+  
+## 🚀 <img alt="asterisk" src="img/asterisk.png"> Passo 1 - Instação Asterisk - Passo a Passo / Documentação.
+>>>>>>> 4aa1208aa141e66a7ba84b62b798041df8634ed4
 
 
-Instalação do asterisk irá  ser me nosso querido CentOS7 
+Instalação do asterisk irá  ser no nosso querido CentOS7 
 
 Vamos efetuar atualização do CentOS  <img alt="Centos 7" src="img/centos.png">
 ```bash
@@ -16,7 +21,7 @@ Após conclusão vamos reniciar o sistema
 sudo reboot
 ```
 
-Agora vamos lá instalar mais uma caralhada de epel para não dar problema lá na frente (serio já deixei de instalar isso já deus alguns bugs inexplicável)
+Agora vamos lá instalar mais uma caralhada de epel para não dar problema lá na frente (serio já deixei de instalar isso já deu  uns alguns bugs inexplicável)
 
 ```bash
 yum install -y epel-release
@@ -146,7 +151,7 @@ Agora está o pulo de gato e é necessário fazer algumas ativações verificaç
 ```bash
 make menuselect
 ```
-Selecione todas essa paradinhas no menuselect.
+Selecione todas essas paradinhas no menuselect.
 
 <img alt="Centos 7" src="img/menuselect.png">
 
@@ -157,7 +162,7 @@ Em “Channel Drivers” se certifique de que **chan_pjsip** esteja marcado:
 
 <img alt="Centos 7" src="img/menuselect2.png">
 
-Deixa igual está ai... agora TAB 2 vezes até chegar em **"SAVE & EXIT"-**
+Deixa igual que está ai... agora TAB 2 vezes até chegar em **"SAVE & EXIT"-**
 
 Agora vamos entrar na reta final!!! uffa!.. O negocinho demorando para fazer. 
 vamos compilar e instalar,Bom acho que eu nao preciso comentar mas já vou frizando para os esquecidinhos de plantão é **UM COMANDO DE CADA VEZ** !!!! 
