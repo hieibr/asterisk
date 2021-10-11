@@ -1,9 +1,6 @@
-<<<<<<< HEAD
-## 🚀 Documentação 1 - Instação Asterisk - Passo a Passo / Documentação. <img alt="asterisk" src="img/asterisk.png">
-=======
+
   
 ## 🚀 <img alt="asterisk" src="img/asterisk.png"> Passo 1 - Instação Asterisk - Passo a Passo / Documentação.
->>>>>>> 4aa1208aa141e66a7ba84b62b798041df8634ed4
 
 
 Instalação do asterisk irá  ser no nosso querido CentOS7 
