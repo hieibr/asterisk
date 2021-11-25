@@ -1,0 +1,217 @@
+- Crie um banco de dados com a estrutura:
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+
+-- Banco de Dados: `asteriskcdrdb`
+
+CREATE DATABASE IF NOT EXISTS `asteriskcdrdb` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+
+USE `asteriskcdrdb`;
+
+-- --------------------------------------------------------
+
+-- Estrutura da tabela `cdr`
+
+DROP TABLE IF EXISTS `cdr`;
+
+CREATE TABLE IF NOT EXISTS `cdr` (
+
+`id` int(10) NOT NULL,
+  
+`calldate` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+`clid` varchar(80) NOT NULL DEFAULT '',  
+`src` varchar(80) NOT NULL DEFAULT '',
+`realsrc` varchar(80) NOT NULL,
+`dst` varchar(80) NOT NULL DEFAULT '',
+`realdst` varchar(80) NOT NULL DEFAULT '',
+`dcontext` varchar(80) NOT NULL DEFAULT '',  
+`channel` varchar(80) NOT NULL DEFAULT '',  
+`dstchannel` varchar(80) NOT NULL DEFAULT '',
+`lastapp` varchar(80) NOT NULL DEFAULT '',
+`lastdata` varchar(80) NOT NULL DEFAULT '',
+`duration` int(11) NOT NULL DEFAULT '0',
+`billsec` int(11) NOT NULL DEFAULT '0',
+`disposition` varchar(45) NOT NULL DEFAULT '',
+`amaflags` int(11) NOT NULL DEFAULT '0',
+`remoteip` varchar(60) NOT NULL DEFAULT '',
+`accountcode` varchar(20) NOT NULL DEFAULT '',
+`hangupcause` varchar(50) NOT NULL,
+`peerip` varchar(50) NOT NULL,
+`recvip` varchar(50) NOT NULL,
+`useragent` varchar(50) NOT NULL,
+`uri` varchar(50) NOT NULL,
+`fromuri` varchar(50) NOT NULL,
+`peeraccount` varchar(20) NOT NULL DEFAULT '',
+`uniqueid` varchar(32) NOT NULL DEFAULT '',
+`userfield` varchar(255) NOT NULL DEFAULT '',
+`did` varchar(50) NOT NULL DEFAULT '',
+`linkedid` varchar(32) NOT NULL DEFAULT '',
+`sequence` int(11) NOT NULL DEFAULT '0',
+`filename` varchar(255) DEFAULT 'none',
+`recordingfile` varchar(255) DEFAULT NULL
+
+) ENGINE=InnoDB AUTO_INCREMENT=21758 DEFAULT CHARSET=utf8;
+
+-- Gatilhos `cdr`
+
+DROP TRIGGER IF EXISTS `t_cdr`;
+
+DELIMITER //
+
+CREATE TRIGGER `t_cdr` BEFORE INSERT ON `cdr`
+
+ 
+FOR EACH ROW BEGIN
+
+ 
+IF ((NEW.dst = 's' OR NEW.dst = '~~s~~') AND NEW.realdst != '') THEN
+
+  
+SET NEW.dst = NEW.realdst;
+ 
+END IF;
+
+END
+
+//
+
+DELIMITER ;
+
+-- --------------------------------------------------------
+
+
+-- Estrutura da tabela `cel`
+
+DROP TABLE IF EXISTS `cel`;
+CREATE TABLE IF NOT EXISTS `cel` (
+`id` int(11) NOT NULL,  
+`eventtype` varchar(30) NOT NULL,
+`eventtime` datetime NOT NULL,
+`cid_name` varchar(80) NOT NULL, 
+`cid_num` varchar(80) NOT NULL,
+`cid_ani` varchar(80) NOT NULL,
+`cid_rdnis` varchar(80) NOT NULL,
+`cid_dnid` varchar(80) NOT NULL,
+`exten` varchar(80) NOT NULL,
+`context` varchar(80) NOT NULL,
+`channame` varchar(80) NOT NULL,
+`src` varchar(80) NOT NULL,
+`dst` varchar(80) NOT NULL,
+`channel` varchar(80) NOT NULL,
+`dstchannel` varchar(80) NOT NULL,
+`appname` varchar(80) NOT NULL,
+`appdata` varchar(80) NOT NULL,
+`amaflags` int(11) NOT NULL,
+`accountcode` varchar(20) NOT NULL,
+`uniqueid` varchar(32) NOT NULL,
+`linkedid` varchar(32) NOT NULL,
+`peer` varchar(80) NOT NULL,
+`userdeftype` varchar(255) NOT NULL,
+`eventextra` varchar(255) NOT NULL,
+`userfield` varchar(255) NOT NULL
+
+) ENGINE=InnoDB AUTO_INCREMENT=207114 DEFAULT CHARSET=utf8;
+
+-- Índices de tabelas salvas
+
+-- Índice da tabela `cdr`
+
+ALTER TABLE `cdr`
+
+ 
+ADD PRIMARY KEY (`id`), ADD KEY `calldate` (`calldate`), ADD KEY `src` (`src`), ADD KEY `dst` (`dst`), ADD KEY `accountcode` (`accountcode`), ADD KEY `uniqueid` (`uniqueid`), ADD KEY `dcontext` (`dcontext`), ADD KEY `clid` (`clid`), ADD KEY `did` (`did`), ADD KEY `id` (`id`);
+
+
+-- Índice da tabela `cel`
+
+ALTER TABLE `cel`
+
+ 
+ADD PRIMARY KEY (`id`), ADD KEY `uniqueid_index` (`uniqueid`), ADD KEY `linkedid_index` (`linkedid`);
+
+-- AUTO_INCREMENT para tabelas salvas
+
+-- AUTO_INCREMENT para tabela `cdr`
+
+ALTER TABLE `cdr`
+
+MODIFY `id` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=21758;
+
+-- AUTO_INCREMENT para tabela `cel`
+
+ALTER TABLE `cel`
+
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=207114;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+2 - Edite o arquivo /etc/asterisk/cdr_mysql.conf
+
+[global]
+usegmtime=no
+cdrzone=America/Sao_Paulo
+
+[columns]
+alias start => calldate
+alias realdst => realdst
+alias remoteip => remoteip
+alias start => calldate
+alias hangupcause => hangupcause
+alias peerip => peerip
+alias recvip => recvip
+alias fromuri => fromuri
+alias useragent => useragent
+alias filename => filename
+alias realsrc => realsrc
+
+--- Na seção [global], não há dados de conexão, já que gravamos dados no MySQL através do driver ODBC.
+
+3 - Edite o arquivo /etc/asterisk/cdr_adaptive_odbc.conf
+
+[cdr_adaptive_connection]
+connection=asteriskcdrdb
+table=cdr
+usegmtime=no
+alias start => calldate
+alias realdst => realdst
+alias remoteip => remoteip
+alias start => calldate
+alias hangupcause => hangupcause
+alias peerip => peerip
+alias recvip => recvip
+alias fromuri => fromuri
+alias useragent => useragent
+alias filename => filename
+alias realsrc => realsrc
+
+4 - Edite o arquivo /etc/asterisk/cdr_odbc.conf
+
+[global]
+dsn=asteriskcdrdb
+loguniqueid=yes
+dispositionstring=yes
+table=cdr
+usegmtime=no
+hrtime=yes
+newcdrcolumns=yes
+
+
+5 - Crie a MACRO para CDR Estendido (Extended CDR):
+
+;CDR Estendido
+[macro-cdr-extended]
+exten => s,1,NoOp("Extended CDR")
+ same => n,Set(CDR(hangupcause)=${HANGUPCAUSE})
+ same => n,Set(CDR(peerip)=${CHANNEL(peerip)})
+ same => n,Set(CDR(recvip)=${CHANNEL(recvip)})
+ same => n,Set(CDR(uri)=${CHANNEL(uri)})
+ same => n,Set(CDR(fromuri)=${CHANNEL(from)})
+ same => n,Set(CDR(useragent)=${CHANNEL(useragent)})
+ same => n,MacroExit()
