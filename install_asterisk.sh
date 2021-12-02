@@ -36,6 +36,10 @@ echo "# Instalação OBDC MariaDB"
 echo "# Instalação do CSF"
 echo "# Instalação do PJSIP"
 echo "# Instalação do  Asterisk 18"
+echo "# INSTALANDO TRATAMENTO HANGUPCAUSE"
+echo "# INSTALANDO AUDIO EM PORTUGUÊS BRASIL"
+
+
 echo "======================================================================================="
 sleep 10
 
@@ -257,10 +261,10 @@ clear
 
 
 #============================================================================================
-# Instalação do PSSIP
+# Instalação do PJSIP
 #============================================================================================
 echo ""
-cowsay -f tux  "Instalação do PSSIP"
+cowsay -f tux  "Instalação do PJSIP"
 echo ""
 sleep 5
 
@@ -320,6 +324,71 @@ echo -e "\033[40;32m Instalação Completa \033[1m"
 echo -e "\033[40;32m======================================================================================================================================== \033[0m"
 sleep 5
 clear
+
+
+#============================================================================================
+#INSTALANDO TRATAMENTO HANGUPCAUSE
+#============================================================================================
+
+echo ""
+cowsay "INSTALANDO TRATAMENTO HANGUPCAUSE"
+echo ""
+sleep 5
+sed -i '/extensions_tratamento_hangupcause.conf/d' /etc/asterisk/extensions_override_freepbx.conf
+echo "#include /etc/asterisk/extensions_tratamento_hangupcause.conf" >> /etc/asterisk/extensions_override_freepbx.conf
+rsync --progress -r /usr/src/IssabelBR/etc/asterisk/ /etc/asterisk/
+chown asterisk.asterisk /etc/asterisk/extensions_tratamento_hangupcause.conf
+echo ""
+rm -Rf /usr/src/IssabelBR
+clear
+
+echo -e "\033[40;32m======================================================================================================================================== \033[1m"
+echo -e "\033[40;32m Instalação Completa \033[1m"
+echo -e "\033[40;32m======================================================================================================================================== \033[0m"
+sleep 5
+clear
+
+
+#============================================================================================
+#INSTALANDO AUDIO EM PORTUGUÊS BRASIL
+#============================================================================================
+echo ""
+svn co https://github.com/ibinetwork/IssabelBR/trunk/ /usr/src/IssabelBR
+echo ""
+cowsay "INSTALANDO AUDIO EM PORTUGUÊS BRASIL"
+echo ""
+sleep 5
+
+rsync --progress -r -u /usr/src/IssabelBR/audio/ /var/lib/asterisk/sounds/
+sed -i '/language=pt_BR/d' /etc/asterisk/sip_general_custom.conf
+echo "language=pt_BR" >> /etc/asterisk/sip_general_custom.conf
+sed -i '/language=pt_BR/d' /etc/asterisk/iax_general_custom.conf
+echo "language=pt_BR" >> /etc/asterisk/iax_general_custom.conf
+sed -i '/defaultlanguage=pt_BR/d' /etc/asterisk/asterisk.conf
+echo "defaultlanguage=pt_BR" >> /etc/asterisk/asterisk.conf
+clear
+
+echo -e "\033[40;32m======================================================================================================================================== \033[1m"
+echo -e "\033[40;32m Instalação Completa \033[1m"
+echo -e "\033[40;32m======================================================================================================================================== \033[0m"
+sleep 5
+clear
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 echo -e "\033[40;32m======================================================================================================================================== \033[1m"
